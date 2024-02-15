@@ -4,7 +4,7 @@ import usersMiddleware from './middlewares/usersMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', usersMiddleware.test, users.getAll);
+router.get('/user', usersMiddleware.test, users.getAll);
 router.post('/user', usersMiddleware.test, users.createUser);
 router.delete('/user/:id', usersMiddleware.test, users.deleteUser);
 router.put('/user/:id', usersMiddleware.test, users.updateUser);
