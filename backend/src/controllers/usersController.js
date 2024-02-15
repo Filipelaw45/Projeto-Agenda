@@ -13,8 +13,8 @@ const createUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
 
-  await usersModel.deleteUser(id);
-  return res.status(204).json();
+  const removedUser = await usersModel.deleteUser(id);
+  return res.status(204).json(removedUser);
 };
 
 export default {
