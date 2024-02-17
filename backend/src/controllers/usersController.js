@@ -1,11 +1,13 @@
+import bcrypt from 'bcrypt';
 import usersModel from '../models/usersModel.js';
 
-const getAll = async (_req, res) => {
-  const users = await usersModel.getAll();
+const getUsers = async (_req, res) => {
+  const users = await usersModel.getUsers();
   return res.status(200).json(users);
 };
 
 const createUser = async (req, res) => {
+  req.body.password = await bcrypt.hash(req.body.password, 10);
   const createdUser = await usersModel.createUser(req.body);
   return res.status(201).json(createdUser);
 };
@@ -25,7 +27,7 @@ const updateUser = async (req, res) => {
 };
 
 export default {
-  getAll,
+  getUsers,
   createUser,
   deleteUser,
   updateUser,
