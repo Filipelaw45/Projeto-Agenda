@@ -1,13 +1,19 @@
 import connection from './connection.js';
 
 const getUser = async (username) => {
-  const query = 'SELECT ID_user, username, password FROM users WHERE username = ?';
+  const query = 'SELECT * FROM users WHERE username = ?';
   const [user] = await connection.execute(query, [username]);
   return user[0];
 };
 
+const getUserById = async (id) => {
+  const query = 'SELECT ID_user, username FROM users WHERE ID_user = ?';
+  const [user] = await connection.execute(query, [id]);
+  return user[0];
+};
+
 const getUsers = async () => {
-  const [users] = await connection.execute('SELECT ID_user, username, password FROM users');
+  const [users] = await connection.execute('SELECT * FROM users');
   return users;
 };
 
@@ -37,6 +43,7 @@ const updateUser = async (id, user) => {
 
 export default {
   getUser,
+  getUserById,
   getUsers,
   createUser,
   deleteUser,

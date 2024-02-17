@@ -6,6 +6,11 @@ const getUsers = async (_req, res) => {
   return res.status(200).json(users);
 };
 
+const getUserById = async (id) => {
+  const user = await usersModel.getUserById(id);
+  return user;
+};
+
 const createUser = async (req, res) => {
   req.body.password = await bcrypt.hash(req.body.password, 10);
   const createdUser = await usersModel.createUser(req.body);
@@ -28,6 +33,7 @@ const updateUser = async (req, res) => {
 
 export default {
   getUsers,
+  getUserById,
   createUser,
   deleteUser,
   updateUser,
