@@ -2,6 +2,10 @@ const formCadastro = document.getElementById('cadastro-form');
 const usernameCadastro = document.getElementById('cadastro-usuario');
 const passwordCadastro = document.getElementById('cadastro-senha');
 
+const formLogin = document.getElementById('login-form');
+const usernameLogin = document.getElementById('login-usuario');
+const passwordLogin = document.getElementById('login-senha');
+
 const cadastro = async (e) => {
     e.preventDefault();
     const user = {
@@ -18,12 +22,11 @@ const cadastro = async (e) => {
             body: JSON.stringify(user)
         });
 
-        if (response.ok) {
+        if (!response.ok) {
             const res = await response.json()
             alert(res.message);
         } else {
-            const res = await response.json()
-            alert(res.message);
+            alert('Usuário criado com sucesso!');
         }
 
         usernameCadastro.value = ''
@@ -33,11 +36,6 @@ const cadastro = async (e) => {
         console.error('Erro ao fazer a requisição:', error);
     }
 }
-formCadastro.addEventListener('submit', cadastro)
-
-const formLogin = document.getElementById('login-form');
-const usernameLogin = document.getElementById('login-usuario');
-const passwordLogin = document.getElementById('login-senha');
 
 const login = async (e) => {
     e.preventDefault();
@@ -58,14 +56,8 @@ const login = async (e) => {
         if (response.ok) {
             const res = await response.json()
             localStorage.setItem('token', res.token);
-
             let item = localStorage.getItem('token');
-
-            if (!item) {
-                window.location.href = 'index.html';
-            } else {
-                window.location.href = 'agenda.html';
-            }
+            if (item) window.location.href = 'agenda.html';
         } else {
             const res = await response.json()
             alert(res.message);
@@ -77,4 +69,5 @@ const login = async (e) => {
         console.error('Erro ao fazer a requisição:', error);
     }
 }
+formCadastro.addEventListener('submit', cadastro)
 formLogin.addEventListener('submit', login)
