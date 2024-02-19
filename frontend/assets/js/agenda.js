@@ -1,7 +1,24 @@
 const btnLogout = document.getElementById('btn-logout')
 const token = localStorage.getItem('token')
-const authorize = async () => {
 
+const listaNum = document.getElementById('listaNum')
+
+const contactForm = document.getElementById('contact-form')
+const createName = document.getElementById('create-name')
+const createNumber = document.getElementById('create-number')
+
+const modal = document.querySelector('dialog')
+const closeModal = document.getElementById('close-modal')
+
+const contactNameModal = document.getElementById('contact-name')
+const contactNumberModal = document.getElementById('contact-number')
+const updateButtonModal = document.getElementById('confirm-modal')
+
+const observer = new MutationObserver(handleMutation);
+const config = { childList: true, subtree: true };
+observer.observe(document.body, config);
+
+const authorize = async () => {
   try {
     const response = await fetch('http://127.0.0.1:3300/contact', {
       method: 'get',
@@ -10,23 +27,17 @@ const authorize = async () => {
         'authorization': `Bearer ${token}`
       }
     });
-
-    if (!response.ok) {
-      window.location.href = 'index.html';
-    }
+    if (!response.ok) window.location.href = 'index.html';
   } catch (error) {
     console.error('Erro ao fazer a requisição:', error);
   }
 }
-authorize()
 
 const logout = () => {
   localStorage.removeItem('token');
   window.location.href = 'index.html';
 }
-btnLogout.addEventListener('click', logout)
 
-const listaNum = document.getElementById('listaNum')
 const listaNumeros = async () => {
 
   listaNum.innerText = ''
@@ -42,16 +53,16 @@ const listaNumeros = async () => {
     if (response) {
       const contatos = await response.json()
 
-      contatos.forEach(e => {
+      contatos.forEach((e, i) => {
 
         const numItem = `
         <div class="info-item">
-          <h4>Nome: ${e.contactName}</h4>
-          <h4>Telefone: ${e.phoneNumber}</h4>
+          <h4>Nome: <span class="spanName">${e.contactName}</span></h4>
+          <h4>Telefone: <span class="spanNumber">${e.phoneNumber}</span></h4>
         </div>
         <div class="icon-item">
-          <i class="ri-edit-line icon btn-edit" title="Editar"></i>
-          <i contactId="${e.contactID}" class="ri-delete-bin-5-line icon btn-delete" title="Deletar"></i>
+          <i index=${i} contactId="${e.contactID}" class="ri-edit-line icon btn-edit" title="Editar"></i>
+          <i index=${i} contactId="${e.contactID}" class="ri-delete-bin-5-line icon btn-delete" title="Deletar"></i>
         </div>
       `
         const div = document.createElement('div');
@@ -64,11 +75,6 @@ const listaNumeros = async () => {
     console.error('Erro ao fazer a requisição:', error);
   }
 }
-listaNumeros()
-
-const contactForm = document.getElementById('contact-form')
-const createName = document.getElementById('create-name')
-const createNumber = document.getElementById('create-number')
 
 const create = async (e) => {
   e.preventDefault();
@@ -86,30 +92,45 @@ const create = async (e) => {
       body: JSON.stringify(contact)
     });
 
-    if (response.ok) {
-      const testing = await response.json()
-    } else {
-      const testing = await response.json()
+    if (!response.ok) {
+      const res = await response.json()
+      alert(res)
     }
 
     createName.value = ''
     createNumber.value = ''
+
     listaNumeros()
 
   } catch (error) {
     console.error('Erro ao fazer a requisição:', error);
   }
-
-}
-contactForm.addEventListener('submit', create)
-
-function convertHTMLCollectionToArray(htmlCollection) {
-  return Array.from(htmlCollection);
 }
 
-function handleMutation(mutationsList, observer) {
+const convertHTMLCollectionToArray = (htmlCollection)=> Array.from(htmlCollection);
+
+const handleMutation = ()=> {
   const deleteButtons = document.getElementsByClassName('btn-delete');
   const arrayDeleteButtons = convertHTMLCollectionToArray(deleteButtons);
+
+  const editButton = document.getElementsByClassName('btn-edit')
+  const arrayEditButtons = convertHTMLCollectionToArray(editButton);
+
+  const contactName = document.getElementsByClassName('spanName');
+  const arrayContactName = convertHTMLCollectionToArray(contactName);
+
+  const contactNumber = document.getElementsByClassName('spanNumber');
+  const arrayContactNumber = convertHTMLCollectionToArray(contactNumber);
+
+  arrayEditButtons.forEach(e => {
+    e.addEventListener('click', () => {
+      const contactId = e.getAttribute('contactId');
+      modal.setAttribute('contactId', contactId);
+      contactNameModal.value = arrayContactName[e.getAttribute('index')].textContent
+      contactNumberModal.value = arrayContactNumber[e.getAttribute('index')].textContent
+      modal.showModal();
+    });
+  });
 
   arrayDeleteButtons.forEach(e => {
     e.addEventListener('click', () => {
@@ -119,28 +140,21 @@ function handleMutation(mutationsList, observer) {
   });
 }
 
-const observer = new MutationObserver(handleMutation);
-
-const config = { childList: true, subtree: true };
-observer.observe(document.body, config);
-
 const deleteContact = async (contactId) => {
-  const confirmar = confirm("Deseja realmente excluir esse contato?")
+  const accept = confirm("Deseja realmente excluir esse contato?")
 
-  if (confirmar) {
+  if (accept) {
     try {
-      const response = await fetch(`http://localhost:3300/contact/${contactId}`, {
+      const res = await fetch(`http://localhost:3300/contact/${contactId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'authorization': `Bearer ${token}`
         }
       });
-
-      if (response.ok) {
-        console.log(response);
-      } else {
-        console.log(response);
+      if(!res){
+        const response = await res.json()
+        alert(response)
       }
     } catch (error) {
       console.error('Erro ao excluir contato:', error.message);
@@ -148,4 +162,49 @@ const deleteContact = async (contactId) => {
   }
 
   listaNumeros()
+}
+
+const editContact = async (contactId) => {
+  try {
+
+    const data = {
+      contactName: contactNameModal.value,
+      phoneNumber: contactNumberModal.value
+    }
+
+    const res = await fetch(`http://localhost:3300/contact/${contactId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!res.ok) {
+      const response = await res.json()
+      alert(response)
+    }
+  } catch (error) {
+    console.error('Erro ao excluir contato:', error.message);
+  }
+
+  listaNumeros()
+}
+
+authorize()
+listaNumeros()
+
+btnLogout.addEventListener('click', logout)
+contactForm.addEventListener('submit', create)
+
+updateButtonModal.addEventListener('click',()=>{
+  const contactId = modal.getAttribute('contactId')
+  editContact(contactId)
+  modal.close()
+})
+
+closeModal.onclick = () => {
+  modal.close()
+  modal.removeAttribute('contactId')
 }
