@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  background: radial-gradient(circle, #565858 50%, #909596 100%);
+  align-items: center;
+}
+
+form,
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo {
+  margin: 10px;
+}
+
+.container-item {
+  background: #e2e2e2;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  margin: 20px auto;
+  border-radius: 20px;
+  width: 75%;
+}
+
+.form {
+  gap: 10px;
+  width: 60%;
+}
+
+.form-input {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #81818181;
+  outline: none;
+}
+
+.form-input:focus {
+  border: 1px solid transparent;
+  outline: 2px solid #222222;
+}
+
+.botao-enviar {
+  background: #222222;
+  box-shadow: 2px 2px 3px 1px #7a7a7a;
+  border: none;
+  padding: 10px 0;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: all 0.55s ease;
+}
+
+.botao-enviar:hover {
+  box-shadow: none;
+  border: 4px solid #222222;
+  background: transparent;
+  color: #222222;
+  transform: translateY(3px);
+}
+
+.container-bemvindo {
+  background: #e2e2e2;
+  height: 100vh;
+  width: 100%;
+  padding: 40px;
+}
+
+.container-bemvindo-desc {
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  width: 100px;
+  height: auto;
+}
+
+.container-bemvindo-desc h1{
+  font-size: 40px;
+  font-weight: 800;
+  padding: 20px 0;
+}
+
+.container-bemvindo-desc h5{
+  font-size: 15px;
+  font-weight: 300;
+  padding: 15px 0;
+}

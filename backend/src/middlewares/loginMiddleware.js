@@ -4,7 +4,7 @@ const login = (req, res, next) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-      return res.status(400).send({ message: 'Bad request' });
+      return res.status(401).send({ message: 'Unauthorized' });
     }
     next();
   } catch {

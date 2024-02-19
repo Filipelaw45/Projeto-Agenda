@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <script src="./assets/js/autorize.js" defer></script>
+
+  <!-- Link para os ícones utilizados -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Link para css e fontes utilizadas -->
+  <link rel="stylesheet" href="./assets/css/style_index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500;700&family=Julee&family=Major+Mono+Display&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <main class="container-login-cadastro">
+
+    <div class="container-item">
+      <h1 class="titulo">LOGIN</h1>
+      <form class="form" id="login-form">
+        <label for="usuario">
+          Usuário:
+          <input class="form-input" placeholder="Insira seu usuário" type="text" id="login-usuario" />
+        </label>
+        <label for="senha">
+          Senha:
+          <input class="form-input" placeholder="Insira sua senha" type="password" id="login-senha" />
+        </label>
+        <button class="botao-enviar" type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <section class="container-item">
+      <h1 class="titulo">CADASTRO</h1>
+      <form class="form" id="cadastro-form">
+        <label for="cadastro-usuario">
+          Usuário:
+          <input id="cadastro-usuario" class="form-input" placeholder="Insira seu usuário" type="text"/>
+        </label>
+        <label for="cadastro-senha">
+          Senha:
+          <input id="cadastro-senha" class="form-input" placeholder="Insira sua senha" type="password"/>
+        </label>
+        <button id="btn" class="botao-enviar" type="submit">Enviar</button>
+      </form>
+    </section>
+
+  </main>
+
+  <aside>
+    <section class="container-bemvindo">
+      <img class="logo" src="./assets/img/shirto_logo.png" alt="" />
+      <section class="container-bemvindo-desc">
+        <div>
+          <h1>Chegou a sua Agenda Shirto</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget
+            ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa.
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor
+            et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget
+            ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa.
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor
+            et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
+          </p>
+        </div>
+      </section>
+    </section>
+  </aside>
+
+</body>
+
+</html>
