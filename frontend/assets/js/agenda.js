@@ -14,10 +14,6 @@ const contactNameModal = document.getElementById('contact-name')
 const contactNumberModal = document.getElementById('contact-number')
 const updateButtonModal = document.getElementById('confirm-modal')
 
-const observer = new MutationObserver(handleMutation);
-const config = { childList: true, subtree: true };
-observer.observe(document.body, config);
-
 const authorize = async () => {
   try {
     const response = await fetch('http://127.0.0.1:3300/contact', {
@@ -191,6 +187,10 @@ const editContact = async (contactId) => {
 
   listaNumeros()
 }
+
+const observer = new MutationObserver(handleMutation);
+const config = { childList: true, subtree: true };
+observer.observe(document.body, config);
 
 authorize()
 listaNumeros()
