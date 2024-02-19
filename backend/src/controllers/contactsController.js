@@ -20,7 +20,6 @@ const deleteContact = async (req, res) => {
 const updateContact = async (req, res) => {
   const { userId } = req;
   const contactId = req.params.id;
-  console.log(userId, contactId, req.body);
   await contactsModel.updateContact(userId, contactId, req.body);
   return res.status(204).json();
 };
