@@ -90,7 +90,7 @@ const create = async (e) => {
 
     if (!response.ok) {
       const res = await response.json()
-      alert(res)
+      alert(res.error)
     }
 
     createName.value = ''
