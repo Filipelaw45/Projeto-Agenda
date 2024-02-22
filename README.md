@@ -58,7 +58,7 @@ O backend oferece os seguintes endpoints:
   - Corpo da requisição:
     ```json
     {
-      "name": "string",
+      "contactName": "string",
       "phoneNumber": "string"
     }
     ```
