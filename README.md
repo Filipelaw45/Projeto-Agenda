@@ -111,8 +111,8 @@ Este projeto foi desenvolvido como parte do curso Desenvolvimento de sistemas - 
 - [Makawlly Rocha](https://github.com/Mescaule) Front-End
 - [Filipe Andrade](https://github.com/Filipelaw45) Back-End
 - [Mauro Júnior](https://github.com/maurodk) Estrutura do Banco de dados
-- [Hélio Andrade]
-- [Daniel França]
-- [Claudio Henrique]
+- Hélio Andrade
+- Daniel França
+- Claudio Henrique
 
 **Data de Criação:** 18/02/2024
