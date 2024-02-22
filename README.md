@@ -1,6 +1,6 @@
 # Agenda Telefônica
 
-Este é um projeto de agenda de números telefônicos dividido em frontend e backend. O backend foi desenvolvido em Node.js com MySQL, oferecendo operações CRUD (Create, Read, Update, Delete) para contatos e usuários. O frontend foi criado utilizando HTML, CSS e JavaScript, o HTML e CSS foram desenvolvidos por Makawlly Rocha e o JavaScript foi feito em PairProgramming. O frontend consome a API do backend e permite que os usuários realizem operações de cadastro, login e manipulação de contatos.
+Este é um projeto de agenda de números telefônicos dividido em frontend e backend. O backend foi desenvolvido em Node.js com MySQL, oferecendo operações CRUD (Create, Read, Update, Delete) para contatos e usuários. O frontend foi criado utilizando HTML, CSS e JavaScript, o HTML e CSS foram desenvolvidos por [Makawlly Rocha](https://github.com/Mescaule) e o JavaScript foi feito em PairProgramming. O frontend consome a API do backend e permite que os usuários realizem operações de cadastro, login e manipulação de contatos.
 
 ## Backend
 
